@@ -4,17 +4,25 @@ import { getSick } from '@/apis/sick';
 import Layout from '@/components/common/Layout';
 import { Sick } from '@/types/sick';
 
+import useDebouncedValue from './hooks/useDebounce';
+
 function App() {
   const [sicks, setSicks] = useState<Sick[] | null>(null);
   const [input, setInput] = useState<string>('');
+
+  const debounceOnChangeInput = useDebouncedValue<string>(input, 200);
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
   useEffect(() => {
-    getSick({ q: input }).then((res) => setSicks(res));
-  }, [input]);
+    const getSicks = () => {
+      getSick({ q: debounceOnChangeInput }).then((res) => setSicks(res));
+    };
+
+    getSicks();
+  }, [debounceOnChangeInput]);
 
   return (
     <Layout>
