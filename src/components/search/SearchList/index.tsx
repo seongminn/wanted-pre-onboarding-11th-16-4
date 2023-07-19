@@ -2,12 +2,22 @@ import { Sick } from '@/types/sick';
 
 import SearchItem from '../SearchItem';
 
-type SearchList = {
+type SearchListProps = {
   sicks: Sick[];
+  error: boolean;
 };
 
-const SearchList = (props: SearchList) => {
-  const { sicks } = props;
+const SearchList = (props: SearchListProps) => {
+  const { sicks, error } = props;
+
+  if (error)
+    return (
+      <div className="absolute w-full py-5 mt-2 bg-white border-2 rounded-2xl top-full">
+        <span className="px-6 text-base text-gray-500">
+          문제가 발생했습니다. 다시 시도해주세요!
+        </span>
+      </div>
+    );
 
   if (!sicks.length) {
     return (
