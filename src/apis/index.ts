@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { EXPIRATION_TIME } from '@/constants/cache';
+import { Sick } from '@/types/sick';
 
 const BASE_URL = 'http://localhost:4000/';
 
@@ -11,7 +12,7 @@ export const client = axios.create({
   },
 });
 
-const cache: { [key: string]: { data: string; timestamp: number } } = {};
+const cache: { [key: string]: { data: Sick[]; timestamp: number } } = {};
 
 client.interceptors.request.use((config) => {
   const { q } = config.params;
