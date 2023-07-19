@@ -23,7 +23,7 @@ const SearchList = (props: SearchList) => {
 
       <ul className="pt-3">
         {sicks.map((sick) => (
-          <SearchItem key={sick.sickCd} sickNm={sick.sickNm} />
+          <SearchItem key={sick.sickCd} tabIndex={0} sickNm={sick.sickNm} />
         ))}
       </ul>
     </div>
