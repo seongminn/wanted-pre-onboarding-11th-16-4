@@ -7,7 +7,5 @@ export const getSick = async (params: { q: string }) => {
 
   const { data } = await client.get<Sick[]>('sick', { params });
 
-  console.info('calling api');
-
   return data;
 };
